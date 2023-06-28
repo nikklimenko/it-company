@@ -1,0 +1,107 @@
+@import "../../../../assets/styles/variables";
+
+footer.footer {
+  padding: 40px 0 54px 0;
+  background: #B9D5FD;
+
+  .container {
+
+    .footer-top {
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+
+      .logo {
+        margin-right: 43px;
+      }
+
+      .footer-menu {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+
+        nav ul {
+          margin: 0;
+          padding: 0;
+          display: flex;
+
+          li {
+            margin-right: 20px;
+            list-style: none;
+
+            a {
+              font-size: 16px;
+              color: $dark-blue-text-color;
+              transition: .2s;
+              cursor: pointer;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+
+    .footer-bottom {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: baseline;
+
+      .footer-bottom-item {
+        margin-right: 60px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .footer-bottom-item-title {
+          margin-bottom: 10px;
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 500;
+          font-size: 16px;
+          color: $light-blue-text-color;
+
+          &.social {
+            margin-bottom: 15px;
+          }
+        }
+
+        .footer-bottom-item-description {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 130%;
+          color: $dark-blue-text-color;
+
+          a {
+            text-decoration: none;
+            color: $dark-blue-text-color;
+          }
+        }
+
+        .button {
+          margin-top: 10px;
+
+          &.button-small {
+            width: 153px;
+            height: 36px;
+          }
+        }
+
+        .footer-bottom-item-social {
+
+          a{
+            margin-right: 15px;
+
+            &:last-child{
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .footer-copyright{
+      font-size: 16px;
+      color: $light-blue-text-color;
+    }
+  }
+}

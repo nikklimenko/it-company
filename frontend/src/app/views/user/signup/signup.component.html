@@ -1,0 +1,71 @@
+<section class="signup" [formGroup]="signupForm">
+  <div class="container">
+    <div class="auth-form">
+      <div class="auth-title">Sign Up</div>
+      <div class="auth-inputs">
+        <div class="auth-input">
+          <input type="text" class="input" placeholder="Your name"
+                 [ngStyle]="{'border-color': signupForm.get('name')?.invalid
+                 && (signupForm.get('name')?.touched || signupForm.get('name')?.dirty) ? 'red' : ''}"
+                 formControlName="name">
+          <div class="invalid-feedback" *ngIf="signupForm.get('name')?.errors?.['required']
+                          && (signupForm.get('name')?.touched || signupForm.get('name')?.dirty)">
+            Name is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="signupForm.get('name')?.invalid
+                          && signupForm.get('name')?.touched
+                          && signupForm.get('name')?.errors?.['pattern']">
+            Please enter a valid name.
+          </div>
+        </div>
+        <div class="auth-input">
+          <input type="text" class="input" placeholder="E-mail"
+                 [ngStyle]="{'border-color': signupForm.get('email')?.invalid
+                 && (signupForm.get('email')?.touched || signupForm.get('email')?.dirty) ? 'red' : ''}"
+                 formControlName="email">
+          <div class="invalid-feedback" *ngIf="signupForm.get('email')?.errors?.['required']
+                          && (signupForm.get('email')?.touched || signupForm.get('email')?.dirty)">
+            E-mail is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="signupForm.get('email')?.invalid
+                          && signupForm.get('email')?.touched
+                          && signupForm.get('email')?.errors?.['email']">
+            Please enter a valid email.
+          </div>
+        </div>
+        <div class="auth-input">
+          <input type="password" class="input" placeholder="Password"
+                 [ngStyle]="{'border-color': signupForm.get('password')?.invalid
+                 && (signupForm.get('password')?.touched || signupForm.get('password')?.dirty) ? 'red' : ''}"
+                 formControlName="password"
+          >
+          <div class="invalid-feedback" *ngIf="signupForm.get('password')?.errors?.['required']
+                          && (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)">
+            Password is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="signupForm.get('password')?.invalid
+                          && signupForm.get('password')?.touched
+                          && signupForm.get('password')?.errors?.['pattern']">
+            Password must be at least 8 characters long, contain at least 1 uppercase letter and at least 1 number
+          </div>
+        </div>
+        <div class="auth-checkbox">
+          <input type="checkbox" id="agree" formControlName="agree">
+          <label for="agree">
+            I accept the <a href="#">terms of service</a> and give
+            <a href="#">consent to the processing of personal data.</a>
+          </label>
+        </div>
+      </div>
+      <div class="auth-button">
+        <button class="button" [disabled]="signupForm.invalid" (click)="signup()">Sign Up</button>
+      </div>
+      <div class="auth-link">
+        Already have an account? <a routerLink="/login">Log in</a>.
+      </div>
+    </div>
+    <div class="page-image">
+      <img src="./assets/images/signup.png" alt="image">
+    </div>
+  </div>
+</section>

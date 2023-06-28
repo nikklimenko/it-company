@@ -1,0 +1,53 @@
+<section class="login" [formGroup]="loginForm">
+  <div class="container">
+    <div class="auth-form">
+      <div class="auth-title">User Login</div>
+      <div class="auth-inputs">
+        <div class="auth-input">
+          <input type="text" class="input" placeholder="E-mail"
+                 [ngStyle]="{'border-color': loginForm.get('email')?.invalid
+                 && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty) ? 'red' : ''}"
+                 formControlName="email">
+          <div class="invalid-feedback" *ngIf="loginForm.get('email')?.errors?.['required']
+                          && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)">
+            E-mail is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="loginForm.get('email')?.invalid
+                          && loginForm.get('email')?.touched
+                          && loginForm.get('email')?.errors?.['email']">
+            Please enter a valid email.
+          </div>
+        </div>
+
+        <div class="auth-input">
+          <input type="password" class="input" placeholder="Password"
+                 [ngStyle]="{'border-color': loginForm.get('password')?.invalid
+                 && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty) ? 'red' : ''}"
+                 formControlName="password">
+          <div class="invalid-feedback" *ngIf="loginForm.get('password')?.errors?.['required']
+                          && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">
+            Password is required.
+          </div>
+          <div class="invalid-feedback" *ngIf="loginForm.get('password')?.invalid
+                          && loginForm.get('password')?.touched
+                          && loginForm.get('password')?.errors?.['pattern']">
+            Password must be at least 8 characters long, contain at least 1 uppercase letter and at least 1 number
+          </div>
+        </div>
+        <div class="auth-checkbox">
+          <input type="checkbox" id="remember"  formControlName="rememberMe">
+          <label for="remember">Remember me</label>
+        </div>
+      </div>
+      <div class="auth-button">
+        <button class="button" [disabled]="loginForm.invalid" (click)="login()">Login</button>
+      </div>
+      <div class="auth-link">
+        Don't have an account? <a routerLink="/signup">Sign up</a>.
+      </div>
+    </div>
+    <div class="page-image">
+      <img src="./assets/images/login.png" alt="image">
+    </div>
+  </div>
+</section>
