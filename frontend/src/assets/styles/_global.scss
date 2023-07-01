@@ -62,3 +62,19 @@ html, body {
     }
   }
 }
+
+
+ .owl-dots {
+  position: absolute;
+  bottom: 10px;
+  left: calc(50% - 32px);
+  z-index: 999;
+}
+
+.owl-theme .owl-dots .owl-dot span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: transparent;
+  border: 1px solid #fff;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: #fff;
+}

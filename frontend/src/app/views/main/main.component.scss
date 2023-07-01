@@ -1,0 +1,98 @@
+@import "../../../assets/styles/variables";
+
+.main-carousel {
+  padding-bottom: 120px;
+
+  .container {
+
+    .carousel-items {
+      position: relative;
+
+      .carousel-arrows {
+        cursor: pointer;
+
+        .move-backward {
+          position: absolute;
+          top: calc(50% - 7px);
+          left: 11px;
+          z-index: 999;
+        }
+
+        .move-forward {
+          position: absolute;
+          top: calc(50% - 7px);
+          right: 11px;
+          z-index: 999;
+        }
+      }
+
+      .carousel-item {
+        background-repeat: no-repeat;
+        background-position: right;
+        height: 500px;
+        box-sizing: border-box;
+
+        .carousel-item-info {
+          background-color: #B9D5FD;
+          border-radius: 0% 100% 30% 70% / 100% 0% 100% 0%;
+          width: 702px;
+          height: 100%;
+
+          .info-content {
+            padding-left: 80px;
+            padding-top: 86px;
+
+            .info-pre-title {
+              font-family: 'Montserrat', sans-serif;
+              font-weight: 600;
+              font-size: 12px;
+              letter-spacing: 0.4em;
+              text-transform: uppercase;
+              color: $light-blue-text-color;
+            }
+
+            &.first {
+              padding-top: 100px;
+              width: 500px;
+            }
+
+            .info-title {
+              font-family: 'Lora', sans-serif;
+              font-weight: 400;
+              font-size: 50px;
+              line-height: 130%;
+              color: #FFFFFF;
+
+              span {
+                color: $light-blue-text-color;
+              }
+            }
+
+            .info-text {
+              font-family: 'Montserrat', sans-serif;
+              font-weight: 400;
+              font-size: 24px;
+              line-height: 130%;
+              width: 456px;
+              color: #FFFFFF;
+              margin-top: 20px;
+            }
+
+            .info-action {
+              margin-top: 50px;
+
+              button.button {
+                width: 163px;
+                height: 51px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+

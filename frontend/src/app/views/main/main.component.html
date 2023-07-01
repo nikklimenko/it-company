@@ -1,1 +1,75 @@
-<p>main works!</p>
+<section class="main-carousel">
+  <div class="container">
+    <div class="carousel-items">
+
+      <div class="carousel-arrows">
+        <a class="move-backward" (click)="owlCar.prev()">
+          <img src="./assets/images/page/carousel-previous.png" alt="prev">
+        </a>
+        <a class="move-forward" (click)="owlCar.next()">
+          <img src="./assets/images/page/carousel-next.png" alt="next">
+        </a>
+      </div>
+
+
+      <owl-carousel-o [options]="customOptions" #owlCar>
+        <ng-template carouselSlide>
+          <div class="carousel-item" style="background-image: url('./assets/images/page/main-carousel-1.png');">
+            <div class="carousel-item-info">
+              <div class="info-content first">
+                <div class="info-pre-title">Offer of the Month</div>
+                <div class="info-title">
+                  Instagram promotion for your business <span>-15%</span>!
+                </div>
+                <div class="info-action">
+                  <button class="button">Learn more</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template carouselSlide>
+          <div class="carousel-item" style="background-image: url('./assets/images/page/main-carousel-2.png');">
+            <div class="carousel-item-info">
+              <div class="info-content">
+                <div class="info-pre-title">Promotion</div>
+                <div class="info-title">
+                  Need a professional <span>copywriter</span>?
+                </div>
+                <div class="info-text">
+                  We have a special promotion on copywriting services throughout December.
+                </div>
+                <div class="info-action">
+                  <button class="button">Learn more</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template carouselSlide>
+          <div class="carousel-item" style="background-image: url('./assets/images/page/main-carousel-3.png');">
+            <div class="carousel-item-info">
+              <div class="info-content">
+                <div class="info-pre-title">News of the Day</div>
+                <div class="info-title">
+                  <span>6th place</span> in the TOP-10
+                  SMM agencies in Kyiv!
+                </div>
+                <div class="info-text">
+                  We would like to thank everyone who voted for us!
+                </div>
+                <div class="info-action">
+                  <button class="button">Learn more</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+
+
+    </div>
+  </div>
+</section>
