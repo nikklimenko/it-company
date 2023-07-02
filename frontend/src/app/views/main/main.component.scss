@@ -1,7 +1,8 @@
 @import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
 
 .main-carousel {
-  padding-bottom: 120px;
+  padding-bottom: 60px;
 
   .container {
 
@@ -93,6 +94,151 @@
   }
 }
 
+.services {
+  padding: 60px 0;
+  .container {
+    .services-title {
+      @include head-lora-38;
+      margin-bottom: 40px;
+    }
 
+    .services-items {
+      display: flex;
+      justify-content: space-between;
 
+      .services-item {
+        width: 291px;
+
+        .item-image {
+          width: 291px;
+          height: 291px;
+          border-radius: 5px;
+          background-size: cover;
+          background-position: center;
+          margin-bottom: 15px;
+        }
+
+        .item-title {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 500;
+          font-size: 20px;
+          color: $light-blue-text-color;
+          margin-bottom: 10px;
+        }
+
+        .item-description {
+          min-height: 90px;
+          font-size: 14px;
+          line-height: 130%;
+          color: $dark-blue-text-color;
+          margin-bottom: 15px;
+        }
+
+        .item-info {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          .item-info-price {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            color: $light-blue-text-color;
+
+            span{
+              font-size: 14px;
+            }
+          }
+
+          .item-info-button {
+            .button {
+              width: 163px;
+              height: 51px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.about {
+  padding: 60px 0;
+  .container {
+    display: flex;
+    justify-content: space-between;
+
+    .about-info {
+      margin-left: 68px;
+
+      .about-info-title{
+        @include head-lora-38;
+        margin-bottom: 20px;
+      }
+
+      .about-info-description {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 130%;
+        color: #1E1A2B;
+        margin-bottom: 40px;
+
+        .bold {
+          font-weight: bold;
+        }
+      }
+
+      .about-info-advantages {
+
+        .advantages-title{
+          @include head-lora-38;
+          font-size: 26px;
+          margin-bottom: 20px;
+        }
+
+        .advantages-items{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 20px 70px;
+
+          .advantages-item{
+            width: 316px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .advantages-item-number{
+              border-radius: 50%;
+              background-color: #B9D5FD;
+              width: 40px;
+              height: 40px;
+              font-family: 'Lora', sans-serif;
+              font-weight: 500;
+              font-size: 50px;
+              text-align: center;
+              line-height: 0.45;
+              color: $light-blue-text-color;
+            }
+
+            .advantages-item-text {
+              width: 256px;
+              font-family: 'Montserrat', sans-serif;
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 130%;
+              color: #1E1A2B;
+
+              .bold {
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}
 

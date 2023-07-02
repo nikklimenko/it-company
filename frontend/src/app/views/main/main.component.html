@@ -1,7 +1,6 @@
 <section class="main-carousel">
   <div class="container">
     <div class="carousel-items">
-
       <div class="carousel-arrows">
         <a class="move-backward" (click)="owlCar.prev()">
           <img src="./assets/images/page/carousel-previous.png" alt="prev">
@@ -10,8 +9,6 @@
           <img src="./assets/images/page/carousel-next.png" alt="next">
         </a>
       </div>
-
-
       <owl-carousel-o [options]="customOptions" #owlCar>
         <ng-template carouselSlide>
           <div class="carousel-item" style="background-image: url('./assets/images/page/main-carousel-1.png');">
@@ -68,8 +65,57 @@
           </div>
         </ng-template>
       </owl-carousel-o>
+    </div>
+  </div>
+</section>
 
+<section class="services">
+  <div class="container">
+    <div class="services-title">Our Services</div>
+    <div class="services-items">
+      <div class="services-item" *ngFor="let service of services">
+        <div class="item-image" style="background-image: url({{staticImagePath + service.image}})"></div>
+        <div class="item-title">{{service.title}}</div>
+        <div class="item-description">{{service.description}}</div>
+        <div class="item-info">
+          <div class="item-info-price">
+            <span>from</span>
+            {{service.price | formatCurrency}}₴
+          </div>
+          <div class="item-info-button">
+            <button class="button">Learn more</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="about">
+  <div class="container">
+    <div class="about-image">
+      <img src="./assets/images/page/main-about.png" alt="team">
+    </div>
+    <div class="about-info">
+      <div class="about-info-title">Who we are and what we do?</div>
+      <div class="about-info-description">
+        <span class="bold">IT-Storm</span> is your №1 assistant in solving issues such as online promotion, website development for
+        businesses and personal brands, storytelling, copywriting, marketing, visual concept development, and creating
+        informational products. The company was founded in 2019 and has been able to make it to the TOP-10 agencies
+        offering online promotion services.
+      </div>
+      <div class="about-info-advantages">
+        <div class="advantages-title">Our advantages</div>
+        <div class="advantages-items">
+          <div class="advantages-item" *ngFor="let advantage of advantages; let i = index;">
+            <div class="advantages-item-number">{{ i + 1 }}</div>
+            <div class="advantages-item-text">
+              <span class="bold">{{advantage.title}} </span>
+              <span>{{advantage.description}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
