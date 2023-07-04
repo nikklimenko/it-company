@@ -201,7 +201,8 @@
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
-          gap: 20px 70px;
+          column-gap: 70px;
+          row-gap: 50px;
 
           .advantages-item{
             width: 316px;
@@ -237,8 +238,46 @@
           }
         }
       }
-
     }
   }
 }
 
+.popular-articles{
+  padding: 60px 0;
+  .container {
+
+    .popular-articles-title {
+      @include head-lora-38;
+      margin-bottom: 40px;
+    }
+
+    .popular-articles-cards {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .popular-articles-action {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      a {
+        display: inline-block;
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 130%;
+        cursor: pointer;
+        color: $light-blue-text-color;
+
+        svg {
+          position: relative;
+          top: 2px;
+          margin-left: 14px;
+        }
+      }
+    }
+  }
+}

@@ -5,19 +5,19 @@ module.exports = {
     const cyrillicToTranslit = new CyrillicToTranslit();
     let categories = [
       {
-        name: 'Фриланс',
+        name: 'Freelance',
       },
       {
-        name: 'Дизайн',
+        name: 'Design',
       },
       {
         name: 'SMM',
       },
       {
-        name: 'Таргет',
+        name: 'Target',
       },
       {
-        name: 'Копирайтинг',
+        name: 'Copywriting',
       },
     ];
     categories = categories.map(item => {

@@ -12,6 +12,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatMenuModule} from "@angular/material/menu";
 import {CarouselModule} from "ngx-owl-carousel-o";
 import { FormatCurrencyPipe } from './shared/pipes/format-currency.pipe';
+import { ArticleCardComponent } from './shared/components/article-card/article-card.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormatCurrencyPipe } from './shared/pipes/format-currency.pipe';
     HeaderComponent,
     FooterComponent,
     MainComponent,
-    FormatCurrencyPipe
+    FormatCurrencyPipe,
+    ArticleCardComponent
   ],
   imports: [
     BrowserModule,

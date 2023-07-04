@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {OwlOptions} from "ngx-owl-carousel-o";
 import {ServicesType} from "../../../types/services.type";
 import {AdvantagesType} from "../../../types/advantages.type";
+import {ArticleType} from "../../../types/article.type";
+import {ArticleService} from "../../shared/services/article.service";
 
 @Component({
   selector: 'app-main',
@@ -85,11 +87,21 @@ export class MainComponent implements OnInit{
       title: 'We help you sell more.',
       description: 'We not only help develop a sales strategy, but also adjust it to the needs of the customer.'
     },
-  ]
-  constructor() {
+  ];
+
+  popularArticles: ArticleType[] = [];
+
+  constructor(private articleService: ArticleService) {
   }
 
   ngOnInit() {
+
+    this.articleService.getPopularArticles()
+      .subscribe((data:ArticleType[]) => {
+        this.popularArticles = data;
+      })
+
+
   }
 
 
