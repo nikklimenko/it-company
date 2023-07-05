@@ -4,6 +4,7 @@ import {ServicesType} from "../../../types/services.type";
 import {AdvantagesType} from "../../../types/advantages.type";
 import {ArticleType} from "../../../types/article.type";
 import {ArticleService} from "../../shared/services/article.service";
+import {ReviewType} from "../../../types/review.type";
 
 @Component({
   selector: 'app-main',
@@ -11,8 +12,6 @@ import {ArticleService} from "../../shared/services/article.service";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit{
-
-  staticImagePath: string = './assets/images/page/';
 
   customOptions: OwlOptions = {
     loop: true,
@@ -37,7 +36,34 @@ export class MainComponent implements OnInit{
       }
     },
     nav: false
-  }
+  };
+  customOptionsReview: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: true,
+    pullDrag: false,
+    dots: false,
+    margin: 25,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 3
+      }
+    },
+    nav: false
+  };
+
+  staticImagePath: string = './assets/images/page/';
 
   services: ServicesType[] = [
     {
@@ -86,6 +112,39 @@ export class MainComponent implements OnInit{
     {
       title: 'We help you sell more.',
       description: 'We not only help develop a sales strategy, but also adjust it to the needs of the customer.'
+    },
+  ];
+
+  reviews: ReviewType[] = [
+    {
+      name: "Stanislav",
+      image: 'review1.png',
+      review: "Thanks a lot to ITStorm for a wonderful blog with useful articles! It was they who prompted me to delve into the topic of SMM and start my career."
+    },
+    {
+      name: "Irina",
+      image: 'review2.png',
+      review: "I turned to ITStorm for the help of a copywriter. Never regretted it! The guys really put their heart and soul into what they do, and every text I get is looking forward to putting it online."
+    },
+    {
+      name: "Masha",
+      image: 'review3.png',
+      review: "The ITStorm team has done the impossible in such a short period of time: it has grown from a simple promotion service company into a powerful blog about the importance of a personal brand."
+    },
+    {
+      name: "David Wilson",
+      image: 'review4.jpg',
+      review: "I'm impressed with the SMM and web development services provided by this IT company. They have a deep understanding of social media platforms and their web development team creates visually appealing and user-friendly websites."
+    },
+    {
+      name: "Olivia Anderson",
+      image: 'review5.jpg',
+      review: "This IT company is a reliable partner for SMM and web development. Their SMM strategies helped me grow my social media following, and their web development team delivered a responsive website that perfectly represents my brand."
+    },
+    {
+      name: "Daniel Rodriguez",
+      image: 'review6.jpg',
+      review: "I couldn't be happier with the SMM and web development services provided by this IT company. Their team is professional and responsive, and they delivered exceptional results. I highly recommend them for all your digital needs."
     },
   ];
 
