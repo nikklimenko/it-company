@@ -353,3 +353,70 @@
     }
   }
 }
+
+.contacts {
+  padding-top: 60px;
+  padding-bottom: 120px;
+
+  .container {
+    display: flex;
+
+    .contacts-map {
+      .mapouter {
+        position: relative;
+        text-align: right;
+        width: 607px;
+        height: 438px;
+      }
+
+      .gmap_canvas {
+        overflow: hidden;
+        background: none !important;
+        width: 607px;
+        height: 438px;
+      }
+
+      .gmap_iframe {
+        width: 607px !important;
+        height: 438px !important;
+      }
+    }
+
+    .contacts-info {
+      margin-left: 26px;
+
+      .contacts-info-title {
+        @include head-lora-38;
+      }
+
+      .contact-info-item {
+        margin-top: 20px;
+
+        .item-name {
+          font-family: 'Montserrat', sans-serif;
+          font-weight: 500;
+          font-size: 20px;
+          color: $light-blue-text-color;
+          margin-bottom: 10px;
+        }
+
+        .item-description {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 130%;
+          color: $dark-blue-text-color;
+        }
+
+        .item-social {
+          display: flex;
+          align-items: center;
+
+          a {
+            text-decoration: none;
+            margin-right: 20px;
+          }
+        }
+      }
+    }
+  }
+}
