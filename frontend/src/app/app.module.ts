@@ -11,8 +11,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/materia
 import {HttpClientModule} from "@angular/common/http";
 import {MatMenuModule} from "@angular/material/menu";
 import {CarouselModule} from "ngx-owl-carousel-o";
-import { FormatCurrencyPipe } from './shared/pipes/format-currency.pipe';
-import { ArticleCardComponent } from './shared/components/article-card/article-card.component';
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -21,14 +20,13 @@ import { ArticleCardComponent } from './shared/components/article-card/article-c
     HeaderComponent,
     FooterComponent,
     MainComponent,
-    FormatCurrencyPipe,
-    ArticleCardComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     MatSnackBarModule,
     MatMenuModule,
+    SharedModule,
     CarouselModule,
     AppRoutingModule,
     BrowserAnimationsModule
@@ -36,6 +34,7 @@ import { ArticleCardComponent } from './shared/components/article-card/article-c
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

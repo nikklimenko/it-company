@@ -1,0 +1,67 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.blog {
+  padding-top: 80px;
+  padding-bottom: 120px;
+
+  .container {
+
+    .blog-title {
+      @include head-lora-38;
+      margin-bottom: 40px;
+    }
+
+    .blog-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+
+      .blog-applied-filters {
+        max-width: 1071px;
+        display: flex;
+        flex-wrap: wrap;
+
+        .blog-applied-filter {
+          border:2px solid $light-blue-text-color;
+          border-radius: 5px;
+          font-size: 16px;
+          color: $light-blue-text-color;
+          padding: 8px 20px;
+          display: flex;
+          align-items: center;
+          margin-right: 20px;
+          margin-bottom: 20px;
+
+          a {
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            margin-left: 8px;
+          }
+        }
+      }
+
+      .blog-filters {
+        display: flex;
+        align-items: center;
+        span {
+          width: 120px;
+          margin-right: 8px;
+        }
+      }
+    }
+
+    .blog-layout {
+      margin-top: 20px;
+
+      .blog-articles {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        row-gap: 40px;
+        margin-bottom: 40px;
+      }
+    }
+  }
+}

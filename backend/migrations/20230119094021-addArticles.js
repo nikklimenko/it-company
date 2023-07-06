@@ -155,7 +155,7 @@ module.exports = {
 
 
         articles = articles.map(item => {
-            item.url = cyrillicToTranslit.transform(item.title, "_").toLowerCase().replace(/[^\w\s]/g, "");
+            item.url = item.title.toLowerCase().replace(/[^\w]/gi, "_");
             return item;
         });
 
