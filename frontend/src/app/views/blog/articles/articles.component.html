@@ -4,9 +4,9 @@
     <div class="blog-head">
 
       <div class="blog-applied-filters">
-        <div class="blog-applied-filter">
-          <span>Design</span>
-          <a>
+        <div class="blog-applied-filter" *ngFor="let appliedFilter of appliedFilters">
+          <span>{{appliedFilter.name}}</span>
+          <a (click)="removeAppliedFilter(appliedFilter)">
             <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_2682_213)">
                 <line x1="1.93553" y1="3.15002" x2="13.9563" y2="15.1708" stroke="#709FDC" stroke-linecap="round"/>
@@ -22,11 +22,26 @@
         </div>
       </div>
 
-      <div class="blog-filters">
-        <span>Filter</span>
-        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 14.5C9.41668 14.5 8.83335 14.275 8.39168 13.8334L2.95835 8.40003C2.71668 8.15837 2.71668 7.75837 2.95835 7.5167C3.20002 7.27503 3.60002 7.27503 3.84168 7.5167L9.27502 12.95C9.67502 13.35 10.325 13.35 10.725 12.95L16.1583 7.5167C16.4 7.27503 16.8 7.27503 17.0417 7.5167C17.2833 7.75837 17.2833 8.15837 17.0417 8.40003L11.6083 13.8334C11.1667 14.275 10.5833 14.5 10 14.5Z" fill="#071739"/>
-        </svg>
+      <div class="blog-filters" [class.open]="filtersOpen" (click)="toggleFilters()">
+
+        <div class="blog-filters-head">
+          <span>Filter</span>
+          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 14.5C9.41668 14.5 8.83335 14.275 8.39168 13.8334L2.95835 8.40003C2.71668 8.15837 2.71668 7.75837 2.95835 7.5167C3.20002 7.27503 3.60002 7.27503 3.84168 7.5167L9.27502 12.95C9.67502 13.35 10.325 13.35 10.725 12.95L16.1583 7.5167C16.4 7.27503 16.8 7.27503 17.0417 7.5167C17.2833 7.75837 17.2833 8.15837 17.0417 8.40003L11.6083 13.8334C11.1667 14.275 10.5833 14.5 10 14.5Z" fill="#071739"/>
+          </svg>
+        </div>
+
+        <div class="blog-filters-body">
+          <div class="blog-filters-item"
+               *ngFor="let category of categories"
+               [class.active]="category.isSearching"
+               (click)="updateFilterParam(category.url, !category.isSearching)"
+          >
+            {{category.name}}
+            <span>{{category.isSearching ? '-' : '+'}}</span>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -34,6 +49,28 @@
     <div class="blog-layout">
       <div class="blog-articles">
         <article-card [article]="article" *ngFor="let article of articles"></article-card>
+      </div>
+      <div class="pagination">
+        <div class="pagination-arrow">
+          <a>
+            <img src="./assets/images/page/blog/pagination-arrow-prev-active.png" alt="previous">
+          </a>
+        </div>
+
+        <div class="pagination-pages">
+          <a class="pagination-page active">1</a>
+          <a class="pagination-page">2</a>
+          <a class="pagination-page">3</a>
+          <a class="pagination-page">4</a>
+          <a class="pagination-page">5</a>
+        </div>
+
+        <div class="pagination-arrow">
+          <a>
+            <img src="./assets/images/page/blog/pagination-arrow-next-active.png" alt="next">
+          </a>
+        </div>
+
       </div>
     </div>
   </div>

@@ -43,11 +43,73 @@
       }
 
       .blog-filters {
-        display: flex;
-        align-items: center;
-        span {
-          width: 120px;
-          margin-right: 8px;
+        width: 257px;
+        box-sizing: border-box;
+        position: relative;
+
+
+        .blog-filters-head {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 0 12px 100px;
+          font-size: 16px;
+          color: $dark-blue-text-color;
+          cursor: pointer;
+
+          span {
+            margin-right: 8px;
+          }
+        }
+
+        .blog-filters-body {
+          position: absolute;
+          width: 100%;
+          z-index: 10;
+          display: none;
+          background: #FFFFFF;
+          border: 1.5px solid #B9D5FD;
+          border-radius: 0 0 5px 5px;
+          font-size: 16px;
+          color: #BEBEBE;
+          box-sizing: border-box;
+          padding: 17px 23px;
+
+          .blog-filters-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            cursor: pointer;
+
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            &.active {
+              color: $dark-blue-text-color;
+            }
+
+          }
+        }
+
+        &.open {
+
+          .blog-filters-head {
+            background: #B9D5FD;
+            border-radius: 5px 5px 0 0;
+            padding-left: 23px;
+            padding-right: 20px;
+
+            svg {
+              transform: rotate(180deg);
+            }
+          }
+
+          .blog-filters-body {
+            display: block;
+          }
         }
       }
     }
@@ -61,6 +123,49 @@
         justify-content: space-between;
         row-gap: 40px;
         margin-bottom: 40px;
+      }
+
+      .pagination {
+        margin-top: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .pagination-arrow {
+
+          a {
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+          }
+        }
+
+        .pagination-pages {
+          margin: 0 50px;
+          display: flex;
+          align-items: center;
+
+          a.pagination-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+            width: 28px;
+            height: 46px;
+            margin-right: 20px;
+            font-size: 20px;
+            color: $dark-blue-text-color;
+
+            &:last-child {
+              margin-right: 0;
+            }
+
+            &.active {
+              color: #B9D5FD;
+            }
+          }
+        }
       }
     }
   }
