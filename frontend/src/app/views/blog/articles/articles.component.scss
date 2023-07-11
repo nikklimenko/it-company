@@ -44,6 +44,7 @@
 
       .blog-filters {
         width: 257px;
+        min-width: 257px;
         box-sizing: border-box;
         position: relative;
 
@@ -52,7 +53,7 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 12px 0 12px 100px;
+          padding: 12px 0 12px 130px;
           font-size: 16px;
           color: $dark-blue-text-color;
           cursor: pointer;
@@ -79,7 +80,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            padding: 12px 0;
             cursor: pointer;
 
 
@@ -120,7 +121,8 @@
       .blog-articles {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        //justify-content: space-between;
+        column-gap: 25px;
         row-gap: 40px;
         margin-bottom: 40px;
       }
@@ -137,6 +139,11 @@
             text-decoration: none;
             cursor: pointer;
             display: flex;
+          }
+
+          &.disabled a{
+            cursor: not-allowed;
+            opacity: 0.5;
           }
         }
 

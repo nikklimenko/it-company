@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="blog-filters" [class.open]="filtersOpen" (click)="toggleFilters()">
+      <div class="blog-filters" #blogFilters [class.open]="filtersOpen" (click)="toggleFilters()">
 
         <div class="blog-filters-head">
           <span>Filter</span>
@@ -50,22 +50,26 @@
       <div class="blog-articles">
         <article-card [article]="article" *ngFor="let article of articles"></article-card>
       </div>
-      <div class="pagination">
-        <div class="pagination-arrow">
+      <div class="pagination" *ngIf="pages.length > 1">
+        <div class="pagination-arrow"
+             (click)="openPrevPage()"
+             [class.disabled]="activeParams.page ? activeParams.page === 1 : true">
           <a>
             <img src="./assets/images/page/blog/pagination-arrow-prev-active.png" alt="previous">
           </a>
         </div>
 
-        <div class="pagination-pages">
-          <a class="pagination-page active">1</a>
-          <a class="pagination-page">2</a>
-          <a class="pagination-page">3</a>
-          <a class="pagination-page">4</a>
-          <a class="pagination-page">5</a>
+        <div class="pagination-pages" >
+          <a class="pagination-page" (click)="openPage(page)"
+             [class.active]="activeParams.page ? activeParams.page === page : (page === 1)"
+             *ngFor="let page of pages">
+            {{page}}
+          </a>
         </div>
 
-        <div class="pagination-arrow">
+        <div class="pagination-arrow"
+             (click)="openNextPage()"
+             [class.disabled]="activeParams.page ? activeParams.page === pages.length : false">
           <a>
             <img src="./assets/images/page/blog/pagination-arrow-next-active.png" alt="next">
           </a>
