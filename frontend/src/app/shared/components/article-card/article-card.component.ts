@@ -13,12 +13,9 @@ export class ArticleCardComponent {
   serverStaticPath: string = environment.serverStaticPath;
   @Input() article!: ArticleType;
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
 
-  navigate() {
-    this.router.navigate(['/articles/' + this.article.url]);
-  }
 
 }
