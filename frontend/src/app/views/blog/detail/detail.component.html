@@ -61,9 +61,7 @@
       <div class="article-detail-aside">
         <div class="article-detail-aside-title">Read also:</div>
         <div class="article-detail-aside-articles">
-
-          //add article cards
-
+          <article-card [article]="relatedArticle" *ngFor="let relatedArticle of relatedArticles"></article-card>
         </div>
       </div>
 

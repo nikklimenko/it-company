@@ -13,6 +13,7 @@ export class DetailComponent implements OnInit{
 
   article!: ArticleType;
   serverStaticPath: string = environment.serverStaticPath;
+  relatedArticles: ArticleType[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private articleService: ArticleService) {
@@ -23,6 +24,10 @@ export class DetailComponent implements OnInit{
     this.activatedRoute.params.subscribe(params => {
       this.articleService.getArticle(params['url']).subscribe((data: ArticleType) => {
         this.article = data;
+      });
+
+      this.articleService.getRelatedArticles(params['url']).subscribe((dataRelatedArticles: ArticleType[]) => {
+        this.relatedArticles = dataRelatedArticles;
       })
     })
 

@@ -1,0 +1,121 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.article-detail {
+  padding: 60px 0 120px 0;
+
+  .container {
+
+    .article-breadcrumbs {
+      display: flex;
+      align-items: center;
+      margin-bottom: 60px;
+
+      span {
+        color: #B9D5FD;
+        margin-right: 8px;
+
+      }
+
+      a {
+        font-size: 16px;
+        color: #B9D5FD;
+        text-decoration: none;
+        cursor: pointer;
+        margin-right: 8px;
+
+        &.active-breadcrumbs {
+          font-weight: 500;
+          font-size: 16px;
+          color: $light-blue-text-color;
+          margin-right: 0;
+        }
+      }
+    }
+
+    .article-detail-head {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 60px;
+
+      .article-info {
+        width: 607px;
+        min-width: 607px;
+
+
+        .article-title {
+          @include head-lora-38;
+          margin-bottom: 40px;
+        }
+        .article-description {
+          font-size: 20px;
+          line-height: 130%;
+          color: $light-blue-text-color;
+        }
+      }
+
+      .article-img {
+        width: 527px;
+        min-width: 527px;
+        height: 320px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 5px;
+      }
+
+    }
+
+    .article-detail-layout {
+      display: flex;
+
+      .article-detail-body {
+        width: 818px;
+
+        .article-text{
+          margin-bottom: 61px;
+        }
+
+        .article-shared {
+          display: flex;
+          align-items: center;
+
+          span {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 130%;
+            color: $light-blue-text-color;
+            margin-right: 20px;
+          }
+
+          .article-shared-social {
+            a {
+              text-decoration: none;
+              cursor: pointer;
+              margin-right: 13px;
+            }
+          }
+        }
+      }
+
+      .article-detail-aside {
+        width: 292px;
+        margin-top: 60px;
+        margin-left: 130px;
+
+        .article-detail-aside-title {
+          @include head-lora-38;
+          font-size: 26px;
+          margin-bottom: 20px;
+        }
+
+        .article-detail-aside-articles {
+          display: flex;
+          flex-wrap: wrap;
+          row-gap: 60px;
+          justify-content: flex-end;
+        }
+      }
+    }
+
+  }
+}
