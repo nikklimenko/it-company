@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {LoginResponseType} from "../../../../types/login-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
+import {UserInfoType} from "../../../../types/user-info.type";
 
 @Component({
   selector: 'app-signup',
@@ -50,6 +51,9 @@ export class SignupComponent {
 
             this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
             this.authService.userId = loginResponse.userId;
+            this.authService.getUserInfo().subscribe(data => {
+              this.authService.updateUserName((data as UserInfoType).name);
+            });
             this._snackbar.open('Signup successful');
             this.router.navigate(['/']);
           },

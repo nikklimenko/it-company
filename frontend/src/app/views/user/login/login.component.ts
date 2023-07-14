@@ -6,6 +6,7 @@ import {LoginResponseType} from "../../../../types/login-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {UserInfoType} from "../../../../types/user-info.type";
 
 @Component({
   selector: 'app-login',
@@ -49,6 +50,9 @@ export class LoginComponent {
 
             this.authService.setTokens(loginResponse.accessToken, loginResponse.refreshToken);
             this.authService.userId = loginResponse.userId;
+            this.authService.getUserInfo().subscribe(data => {
+              this.authService.updateUserName((data as UserInfoType).name);
+            });
             this._snackbar.open('Authorization successful');
             this.router.navigate(['/']);
 

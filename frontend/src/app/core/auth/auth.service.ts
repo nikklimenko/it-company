@@ -4,6 +4,7 @@ import {DefaultResponseType} from "../../../types/default-response.type";
 import {Observable, Subject, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {UserInfoType} from "../../../types/user-info.type";
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,21 @@ export class AuthService {
 
   public isLogged$: Subject<boolean> = new Subject<boolean>();
   private isLogged: boolean = false;
+
+  private userNameSubject: Subject<string> = new Subject<string>();
+  userName$ = this.userNameSubject.asObservable();
   constructor(private http: HttpClient) {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
   }
 
+
+  updateUserName(userName: string) {
+    this.userNameSubject.next(userName);
+  }
+
+  // getUserName(): Observable<string> {
+  //   return this.userName$;
+  // }
 
   login(email: string, password: string, rememberMe: boolean ): Observable<DefaultResponseType | LoginResponseType>{
     return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'login', {email, password, rememberMe});
@@ -36,6 +48,20 @@ export class AuthService {
     }
     throw throwError(() => 'Can not find token');
   }
+
+  refresh(): Observable<DefaultResponseType | LoginResponseType>{
+    const tokens = this.getTokens();
+    if(tokens && tokens.refreshToken) {
+      return this.http.post<DefaultResponseType | LoginResponseType>(environment.api + 'refresh', {
+        refreshToken: tokens.refreshToken
+      });
+    }
+    throw throwError(() => 'Can not use token');
+  }
+
+getUserInfo(): Observable<DefaultResponseType | UserInfoType>{
+  return this.http.get<DefaultResponseType | UserInfoType>(environment.api + 'users');
+}
 
   public getIsLoggedIn() {
     return this.isLogged;
