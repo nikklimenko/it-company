@@ -1,0 +1,42 @@
+@import "../../../../assets/styles/variables";
+
+.comment-reaction {
+  margin-top: 39px;
+  width: 126px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .reaction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .reaction-count {
+      margin-right: 3px;
+      color: $dark-blue-text-color;
+      font-family: Montserrat, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .reaction-icon {
+      cursor: pointer;
+    }
+
+    &.active {
+
+      .reaction-count {
+        color: $light-blue-text-color;
+      }
+
+      .reaction-icon {
+        svg {
+          path {
+            stroke: #709FDC;
+          }
+        }
+      }
+    }
+  }
+}

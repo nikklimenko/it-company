@@ -1,4 +1,4 @@
-<section class="article-detail">
+<section class="article-detail" *ngIf="article">
   <div class="container">
     <div class="article-breadcrumbs">
       <a routerLink="/blog">Blog</a>
@@ -54,7 +54,7 @@
           </div>
         </div>
 
-
+        <comments [article]="article"></comments>
 
       </div>
 

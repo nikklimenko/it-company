@@ -1,0 +1,90 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.comments {
+
+  .comments-title {
+    @include head-lora-38;
+    margin-bottom: 20px;
+  }
+
+  .add-comment {
+    margin-bottom: 60px;
+
+    .add-comment-text {
+      width: 100%;
+      height: 248px;
+      padding: 20px;
+      box-sizing: border-box;
+      border: 2px solid $light-blue-text-color;
+      border-radius: 3px;
+      color: $dark-blue-text-color;
+      resize: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      margin-bottom: 20px;
+
+      &::placeholder {
+        color: #A8ABA7;
+      }
+    }
+
+    .add-comment-action {
+
+      button.button {
+        width: 422px;
+        height: 51px;
+      }
+    }
+  }
+
+  .users-comments {
+
+    .users-comments-item {
+      margin-bottom: 40px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .users-comments-item-info {
+        display: flex;
+        margin-bottom: 15px;
+
+        .info-user-img {
+          width: 60px;
+          height: 60px;
+          border: 2px solid $light-blue-text-color;
+          border-radius: 50%;
+          background-color: #bad1f1;
+        }
+
+        .info-detail {
+          margin-left: 26px;
+          font-family: 'Montserrat',sans-serif;
+          font-weight: 600;
+
+          .info-user-name {
+            font-size: 18px;
+            color: $light-blue-text-color;
+            margin-bottom: 10px;
+          }
+
+          .info-comment-date {
+            font-size: 14px;
+            color: #BEBEBE;
+          }
+        }
+      }
+
+      .users-comments-item-comment {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        color: $dark-blue-text-color;
+      }
+    }
+  }
+}

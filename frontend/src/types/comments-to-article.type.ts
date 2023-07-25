@@ -5,7 +5,7 @@ export type CommentsToArticleType = {
   likesCount: number,
   dislikesCount: number,
   user: {
-  id: string,
+    id: string,
     name: string
   }
 }

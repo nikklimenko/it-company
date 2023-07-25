@@ -40,7 +40,7 @@ export class MainComponent implements OnInit{
   customOptionsReview: OwlOptions = {
     loop: true,
     mouseDrag: false,
-    touchDrag: true,
+    touchDrag: false,
     pullDrag: false,
     dots: false,
     margin: 25,

@@ -4,7 +4,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {UserInfoType} from "../../../../types/user-info.type";
-import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-header',
