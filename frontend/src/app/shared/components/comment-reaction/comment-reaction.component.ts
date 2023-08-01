@@ -15,7 +15,7 @@ export class CommentReactionComponent implements OnInit{
   }
 
   ngOnInit() {
-    console.log(this.article);
+    // console.log(this.article);
   }
 
 }

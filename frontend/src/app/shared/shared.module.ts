@@ -5,6 +5,7 @@ import {FormatCurrencyPipe} from "./pipes/format-currency.pipe";
 import {RouterModule} from "@angular/router";
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentReactionComponent } from './components/comment-reaction/comment-reaction.component';
+import { DateFormatPipe } from './pipes/date-format.pipe';
 
 
 
@@ -14,6 +15,7 @@ import { CommentReactionComponent } from './components/comment-reaction/comment-
     FormatCurrencyPipe,
     CommentsComponent,
     CommentReactionComponent,
+    DateFormatPipe,
 
   ],
   imports: [
