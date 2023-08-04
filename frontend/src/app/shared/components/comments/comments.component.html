@@ -6,9 +6,13 @@
   </div>
 
   <div class="add-comment">
-    <textarea class="add-comment-text" placeholder="Write your comment on the article..."></textarea>
+    <textarea class="add-comment-text"
+              [(ngModel)]="commentText"
+              placeholder="Write your comment on the article..."></textarea>
     <div class="add-comment-action">
-      <button class="button">Post a comment</button>
+      <button class="button" (click)="addComment()" [disabled]="commentText.length < 1">
+        Post a comment
+      </button>
     </div>
   </div>
 

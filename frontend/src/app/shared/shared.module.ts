@@ -6,6 +6,7 @@ import {RouterModule} from "@angular/router";
 import { CommentsComponent } from './components/comments/comments.component';
 import { CommentReactionComponent } from './components/comment-reaction/comment-reaction.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -20,6 +21,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule,
   ],
     exports: [ArticleCardComponent, FormatCurrencyPipe, CommentsComponent]

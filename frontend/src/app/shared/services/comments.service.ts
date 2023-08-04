@@ -4,6 +4,7 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {CommentsType} from "../../../types/comments.type";
 import {CommentsParamsType} from "../../../types/comments-params.type";
+import {DefaultResponseType} from "../../../types/default-response.type";
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +18,18 @@ export class CommentsService {
     return this.http.get<CommentsType>(environment.api + 'comments', { params }).pipe(
       switchMap((commentsData: CommentsType) => {
         if (commentsData.allCount <= this.loadedCommentsCount) {
-          // Если количество комментариев меньше или равно, устанавливаем offset в 0
           params.offset = 0;
-          // console.log(`${commentsData.allCount} <= ${this.loadedCommentsCount} : ${commentsData.allCount <= this.loadedCommentsCount} allCount: ${commentsData.allCount} offset: ${params.offset}`)
           return this.http.get<CommentsType>(environment.api + 'comments', { params });
         } else {
-          // Если количество комментариев больше, устанавливаем offset, чтобы получить последние loadedCommentsCount комментариев
-
           params.offset = commentsData.allCount - this.loadedCommentsCount;
-          // console.log(`${commentsData.allCount} > ${this.loadedCommentsCount} : ${commentsData.allCount > this.loadedCommentsCount} allCount: ${commentsData.allCount} offset: ${params.offset}`)
           return this.http.get<CommentsType>(environment.api + 'comments', { params });
         }
       })
     );
+  }
+
+  addComment(text: string, article: string): Observable<DefaultResponseType>{
+    return this.http.post<DefaultResponseType>(environment.api + 'comments', { text, article });
   }
 
   loadMoreComments(){
