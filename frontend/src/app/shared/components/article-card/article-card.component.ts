@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {environment} from "../../../../environments/environment";
 import {ArticleType} from "../../../../types/article.type";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'article-card',
@@ -15,7 +14,5 @@ export class ArticleCardComponent {
 
   constructor() {
   }
-
-
 
 }

@@ -26,7 +26,6 @@ export class DetailComponent implements OnInit {
       this.articleService.getArticle(params['url']).subscribe((data: ArticleType) => {
         this.article = data;
       });
-
       this.articleService.getRelatedArticles(params['url']).subscribe((dataRelatedArticles: ArticleType[]) => {
         this.relatedArticles = dataRelatedArticles;
       });

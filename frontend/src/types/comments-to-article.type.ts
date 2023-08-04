@@ -7,6 +7,8 @@ export type CommentsToArticleType = {
   user: {
     id: string,
     name: string
-  }
+  },
+  isUserLiked: boolean,
+  isUserDisliked: boolean,
 }
 
