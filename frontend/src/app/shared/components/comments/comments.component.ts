@@ -1,10 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ArticleType} from "../../../../types/article.type";
 import {CommentsService} from "../../services/comments.service";
 import {CommentsParamsType} from "../../../../types/comments-params.type";
 import {CommentsToArticleType} from "../../../../types/comments-to-article.type";
 import {CommentsType} from "../../../../types/comments.type";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -16,7 +16,7 @@ import {CommentActionForUserType} from "../../../../types/comment-action-for-use
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss']
 })
-export class CommentsComponent implements OnInit{
+export class CommentsComponent implements OnInit, OnChanges {
 
   @Input() article!: ArticleType;
   comments: CommentsToArticleType[] = [];
@@ -29,42 +29,38 @@ export class CommentsComponent implements OnInit{
               private router: Router,
               private location: Location,
               private _snackBar: MatSnackBar,
-              private activatedRoute: ActivatedRoute) {
+              ) {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const articleChange = changes['article'];
+    if (articleChange) {
+      console.log(articleChange.currentValue)
+      const currentArticle: ArticleType = articleChange.currentValue;
+
+      this.commentsParams = {
+        article: currentArticle.id
+      }
+
+      this.getComments()
+    }
   }
 
   ngOnInit() {
-    // this.comments = this.article.comments;
-    this.showLoadMoreButton = this.article.commentsCount > this.article.comments.length;
+    this.commentsParams = {
+      article: this.article.id
+    }
 
-    // this.activatedRoute.params.subscribe(params => {
-    //   this.router.navigateByUrl(this.router.url);
-    // });
+    // this.comments = this.articleComments;
+    // this.showLoadMoreButton = this.article.commentsCount > this.article.comments.length;
 
-
-    this.commentsService.getArticleCommentsActionsForUser(this.article.id)
-      .subscribe((data: CommentActionForUserType[]) => {
-        this.comments = this.article.comments.map(item => {
-          item.isUserLiked = false;
-          item.isUserDisliked = false;
-          data.forEach(commentAction => {
-            if(commentAction.comment === item.id){
-              item.isUserLiked = commentAction.action === 'like';
-              item.isUserDisliked = commentAction.action === 'dislike';
-            }
-          })
-          return item;
-        });
-      })
-
+    // this.getComments();
 
   }
 
   getComments() {
-    const params: CommentsParamsType = {
-      article: this.article.id
-    };
     this.loading = true;
-    this.commentsService.getComments(params).subscribe((commentsData: CommentsType) => {
+    this.commentsService.getComments(this.commentsParams).subscribe((commentsData: CommentsType) => {
 
       this.commentsService.getArticleCommentsActionsForUser(this.article.id)
         .subscribe((data: CommentActionForUserType[]) => {
@@ -72,7 +68,7 @@ export class CommentsComponent implements OnInit{
             item.isUserLiked = false;
             item.isUserDisliked = false;
             data.forEach(commentAction => {
-              if(commentAction.comment === item.id){
+              if (commentAction.comment === item.id) {
                 item.isUserLiked = commentAction.action === 'like';
                 item.isUserDisliked = commentAction.action === 'dislike';
               }
@@ -102,9 +98,9 @@ export class CommentsComponent implements OnInit{
           this.router.navigate([this.router.url]);
         },
         error: (errorResponse: HttpErrorResponse) => {
-          if(errorResponse.error && errorResponse.error.message){
+          if (errorResponse.error && errorResponse.error.message) {
             this._snackBar.open('Error adding comment, please try again');
-          }else {
+          } else {
             this._snackBar.open('Error adding comment, please try again');
           }
         }

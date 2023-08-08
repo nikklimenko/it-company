@@ -16,7 +16,8 @@ export class DetailComponent implements OnInit {
   relatedArticles: ArticleType[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
-              private articleService: ArticleService) {
+              private articleService: ArticleService,
+              ) {
   }
 
   ngOnInit() {
