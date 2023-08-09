@@ -12,7 +12,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   templateUrl: './comment-reaction.component.html',
   styleUrls: ['./comment-reaction.component.scss']
 })
-export class CommentReactionComponent implements OnInit{
+export class CommentReactionComponent implements OnInit {
 
   @Input() article!: ArticleType;
   @Input() comment!: CommentsToArticleType;
@@ -24,26 +24,22 @@ export class CommentReactionComponent implements OnInit{
   }
 
   ngOnInit() {
-  this.likesCount = this.comment.likesCount;
-  this.dislikesCount = this.comment.dislikesCount;
-
+    this.likesCount = this.comment.likesCount;
+    this.dislikesCount = this.comment.dislikesCount;
   }
 
   like() {
-
     this.commentService.applyAction(this.userActions.like, this.comment.id)
       .subscribe({
         next: (data: DefaultResponseType) => {
-          if(data.error){
+          if (data.error) {
             this._snackBar.open(data.message);
             throw new Error(data.message);
           }
-
           this.comment.isUserDisliked ? this.dislikesCount-- : false;
           this.comment.isUserLiked ? this.likesCount-- : this.likesCount++;
           this.comment.isUserLiked = !this.comment.isUserLiked;
           this.comment.isUserDisliked = false;
-
         },
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {
@@ -53,28 +49,20 @@ export class CommentReactionComponent implements OnInit{
           }
         }
       })
-
-
   }
 
   dislike() {
-    // this.comment.isUserDisliked = !this.comment.isUserDisliked;
-    // this.comment.isUserLiked = false;
-
-
     this.commentService.applyAction(this.userActions.dislike, this.comment.id)
       .subscribe({
         next: (data: DefaultResponseType) => {
-          if(data.error){
+          if (data.error) {
             this._snackBar.open(data.message);
             throw new Error(data.message);
           }
-
           this.comment.isUserLiked ? this.likesCount-- : false;
           this.comment.isUserDisliked ? this.dislikesCount-- : this.dislikesCount++;
           this.comment.isUserDisliked = !this.comment.isUserDisliked;
           this.comment.isUserLiked = false;
-
         },
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {
@@ -84,8 +72,26 @@ export class CommentReactionComponent implements OnInit{
           }
         }
       })
+  }
+  violate() {
+    this.commentService.applyAction(this.userActions.violate, this.comment.id)
+      .subscribe({
+        next: (data: DefaultResponseType) => {
+          if (data.error) {
+            this._snackBar.open('This action has already been applied to the comment');
+            throw new Error(data.message);
+          }
 
-
+          this._snackBar.open('Complaint sent');
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          if (errorResponse.error && errorResponse.error.message) {
+            this._snackBar.open(errorResponse.error.message);
+          } else {
+            this._snackBar.open('Error submitting complaint, please try again');
+          }
+        }
+      })
   }
 
 }

@@ -29,19 +29,16 @@ export class CommentsComponent implements OnInit, OnChanges {
               private router: Router,
               private location: Location,
               private _snackBar: MatSnackBar,
-              ) {
+  ) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
     const articleChange = changes['article'];
     if (articleChange) {
-      console.log(articleChange.currentValue)
       const currentArticle: ArticleType = articleChange.currentValue;
-
       this.commentsParams = {
         article: currentArticle.id
       }
-
       this.getComments()
     }
   }
@@ -50,18 +47,11 @@ export class CommentsComponent implements OnInit, OnChanges {
     this.commentsParams = {
       article: this.article.id
     }
-
-    // this.comments = this.articleComments;
-    // this.showLoadMoreButton = this.article.commentsCount > this.article.comments.length;
-
-    // this.getComments();
-
   }
 
   getComments() {
     this.loading = true;
     this.commentsService.getComments(this.commentsParams).subscribe((commentsData: CommentsType) => {
-
       this.commentsService.getArticleCommentsActionsForUser(this.article.id)
         .subscribe((data: CommentActionForUserType[]) => {
           this.comments = commentsData.comments.map(item => {
@@ -72,11 +62,10 @@ export class CommentsComponent implements OnInit, OnChanges {
                 item.isUserLiked = commentAction.action === 'like';
                 item.isUserDisliked = commentAction.action === 'dislike';
               }
-            })
+            });
             return item;
           });
         });
-
       this.showLoadMoreButton = commentsData.allCount > this.comments.length;
       this.loading = false;
     });
