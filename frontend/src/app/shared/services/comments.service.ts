@@ -46,4 +46,8 @@ export class CommentsService {
     this.loadedCommentsCount += 10;
   }
 
+  defaultCommentCount() {
+    this.loadedCommentsCount = 3;
+  }
+
 }

@@ -37,6 +37,7 @@ export class MainComponent implements OnInit{
     },
     nav: false
   };
+
   customOptionsReview: OwlOptions = {
     loop: true,
     mouseDrag: false,

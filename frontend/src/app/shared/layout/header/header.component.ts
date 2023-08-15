@@ -19,7 +19,6 @@ export class HeaderComponent implements OnInit {
               private _snackbar: MatSnackBar,
               private router: Router) {
     this.isLogged = this.authService.getIsLoggedIn();
-    // this.authService.getUserName().subscribe(userName => this.userName = userName);
   }
 
   ngOnInit() {

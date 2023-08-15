@@ -10,6 +10,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Location} from "@angular/common";
 import {CommentActionForUserType} from "../../../../types/comment-action-for-user.type";
+import {AuthService} from "../../../core/auth/auth.service";
 
 @Component({
   selector: 'comments',
@@ -24,12 +25,16 @@ export class CommentsComponent implements OnInit, OnChanges {
   loading = false;
   commentText: string = '';
   commentsParams!: CommentsParamsType;
+  isLogged: boolean = false;
+
 
   constructor(private commentsService: CommentsService,
+              private authService: AuthService,
               private router: Router,
               private location: Location,
               private _snackBar: MatSnackBar,
   ) {
+    this.isLogged = this.authService.getIsLoggedIn();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -39,6 +44,7 @@ export class CommentsComponent implements OnInit, OnChanges {
       this.commentsParams = {
         article: currentArticle.id
       }
+      this.commentsService.defaultCommentCount();
       this.getComments()
     }
   }

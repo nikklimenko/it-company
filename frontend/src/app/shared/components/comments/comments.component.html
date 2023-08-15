@@ -1,11 +1,15 @@
 <div class="comments">
   <div class="comments-title">Comments</div>
 
+  <div class="user-not-logged-comment" *ngIf="!isLogged">
+    To leave comments, please <a>login</a> or <a>signup</a>.
+  </div>
+
   <div class="users-comments-empty" *ngIf="comments.length < 1">
     Be the first to comment on this article!
   </div>
 
-  <div class="add-comment">
+  <div class="add-comment" *ngIf="isLogged">
     <textarea class="add-comment-text"
               [(ngModel)]="commentText"
               placeholder="Write your comment on the article..."></textarea>
@@ -63,7 +67,5 @@
     </div>
 
   </div>
-
-
 
 </div>
