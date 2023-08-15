@@ -6,6 +6,7 @@ import {UserActionType} from "../../../../types/user-action.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpErrorResponse} from "@angular/common/http";
+import {AuthService} from "../../../core/auth/auth.service";
 
 @Component({
   selector: 'comment-reaction',
@@ -19,8 +20,12 @@ export class CommentReactionComponent implements OnInit {
   likesCount: number = 0;
   dislikesCount: number = 0;
   userActions = UserActionType;
+  isLogged: boolean = false;
 
-  constructor(private commentService: CommentsService, private _snackBar: MatSnackBar) {
+  constructor(private commentService: CommentsService,
+              private _snackBar: MatSnackBar,
+              private authService: AuthService,) {
+    this.isLogged = this.authService.getIsLoggedIn();
   }
 
   ngOnInit() {
@@ -29,69 +34,82 @@ export class CommentReactionComponent implements OnInit {
   }
 
   like() {
-    this.commentService.applyAction(this.userActions.like, this.comment.id)
-      .subscribe({
-        next: (data: DefaultResponseType) => {
-          if (data.error) {
-            this._snackBar.open(data.message);
-            throw new Error(data.message);
+    if(this.isLogged){
+      this.commentService.applyAction(this.userActions.like, this.comment.id)
+        .subscribe({
+          next: (data: DefaultResponseType) => {
+            if (data.error) {
+              this._snackBar.open(data.message);
+              throw new Error(data.message);
+            }
+            this.comment.isUserDisliked ? this.dislikesCount-- : false;
+            this.comment.isUserLiked ? this.likesCount-- : this.likesCount++;
+            this.comment.isUserLiked = !this.comment.isUserLiked;
+            this.comment.isUserDisliked = false;
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.error && errorResponse.error.message) {
+              this._snackBar.open(errorResponse.error.message);
+            } else {
+              this._snackBar.open('Action not taken, please try again');
+            }
           }
-          this.comment.isUserDisliked ? this.dislikesCount-- : false;
-          this.comment.isUserLiked ? this.likesCount-- : this.likesCount++;
-          this.comment.isUserLiked = !this.comment.isUserLiked;
-          this.comment.isUserDisliked = false;
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          if (errorResponse.error && errorResponse.error.message) {
-            this._snackBar.open(errorResponse.error.message);
-          } else {
-            this._snackBar.open('Action not taken, please try again');
-          }
-        }
-      })
+        })
+    } else {
+      this._snackBar.open('For this action you need to login or signup');
+    }
+
   }
 
   dislike() {
-    this.commentService.applyAction(this.userActions.dislike, this.comment.id)
-      .subscribe({
-        next: (data: DefaultResponseType) => {
-          if (data.error) {
-            this._snackBar.open(data.message);
-            throw new Error(data.message);
+    if(this.isLogged){
+      this.commentService.applyAction(this.userActions.dislike, this.comment.id)
+        .subscribe({
+          next: (data: DefaultResponseType) => {
+            if (data.error) {
+              this._snackBar.open(data.message);
+              throw new Error(data.message);
+            }
+            this.comment.isUserLiked ? this.likesCount-- : false;
+            this.comment.isUserDisliked ? this.dislikesCount-- : this.dislikesCount++;
+            this.comment.isUserDisliked = !this.comment.isUserDisliked;
+            this.comment.isUserLiked = false;
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.error && errorResponse.error.message) {
+              this._snackBar.open(errorResponse.error.message);
+            } else {
+              this._snackBar.open('Action not taken, please try again');
+            }
           }
-          this.comment.isUserLiked ? this.likesCount-- : false;
-          this.comment.isUserDisliked ? this.dislikesCount-- : this.dislikesCount++;
-          this.comment.isUserDisliked = !this.comment.isUserDisliked;
-          this.comment.isUserLiked = false;
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          if (errorResponse.error && errorResponse.error.message) {
-            this._snackBar.open(errorResponse.error.message);
-          } else {
-            this._snackBar.open('Action not taken, please try again');
-          }
-        }
-      })
+        })
+    } else {
+      this._snackBar.open('For this action you need to login or signup');
+    }
+
   }
   violate() {
-    this.commentService.applyAction(this.userActions.violate, this.comment.id)
-      .subscribe({
-        next: (data: DefaultResponseType) => {
-          if (data.error) {
-            this._snackBar.open('This action has already been applied to the comment');
-            throw new Error(data.message);
-          }
+    if(this.isLogged){
+      this.commentService.applyAction(this.userActions.violate, this.comment.id)
+        .subscribe({
+          next: (data: DefaultResponseType) => {
+            if (data.error) {
+              this._snackBar.open('This action has already been applied to the comment');
+              throw new Error(data.message);
+            }
 
-          this._snackBar.open('Complaint sent');
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          if (errorResponse.error && errorResponse.error.message) {
-            this._snackBar.open(errorResponse.error.message);
-          } else {
-            this._snackBar.open('Error submitting complaint, please try again');
+            this._snackBar.open('Complaint sent');
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.error && errorResponse.error.message) {
+              this._snackBar.open(errorResponse.error.message);
+            } else {
+              this._snackBar.open('Error submitting complaint, please try again');
+            }
           }
-        }
-      })
+        })
+    } else {
+      this._snackBar.open('For this action you need to login or signup');
+    }
   }
-
 }

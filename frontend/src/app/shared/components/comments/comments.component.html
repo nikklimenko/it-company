@@ -2,7 +2,7 @@
   <div class="comments-title">Comments</div>
 
   <div class="user-not-logged-comment" *ngIf="!isLogged">
-    To leave comments, please <a>login</a> or <a>signup</a>.
+    To write comments, please <a (click)="navigate('login')">login</a> or <a (click)="navigate('signup')">signup</a>.
   </div>
 
   <div class="users-comments-empty" *ngIf="comments.length < 1">

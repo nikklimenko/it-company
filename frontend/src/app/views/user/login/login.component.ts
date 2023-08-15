@@ -5,7 +5,7 @@ import {DefaultResponseType} from "../../../../types/default-response.type";
 import {LoginResponseType} from "../../../../types/login-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserInfoType} from "../../../../types/user-info.type";
 
 @Component({
@@ -23,7 +23,8 @@ export class LoginComponent {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private _snackbar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
   }
 
 
@@ -54,7 +55,13 @@ export class LoginComponent {
               this.authService.updateUserName((data as UserInfoType).name);
             });
             this._snackbar.open('Authorization successful');
-            this.router.navigate(['/']);
+
+            const articleUrl = this.activatedRoute.snapshot.queryParams['articleUrl'];
+            if (articleUrl) {
+              this.router.navigate(['/article/' + articleUrl]);
+            } else {
+              this.router.navigate(['/']);
+            }
 
           },
           error: (errorResponse: HttpErrorResponse) => {

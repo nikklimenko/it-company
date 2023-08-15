@@ -26,13 +26,15 @@ export class HeaderComponent implements OnInit {
       this.isLogged = isLoggedIn;
     });
 
-    this.authService.getUserInfo().subscribe((userData: DefaultResponseType | UserInfoType) => {
-      if((userData as DefaultResponseType).error !== undefined){
-        throw new Error((userData as DefaultResponseType).message);
-      }
-      this.userName = (userData as UserInfoType).name;
+    if(this.isLogged){
+      this.authService.getUserInfo().subscribe((userData: DefaultResponseType | UserInfoType) => {
+        if((userData as DefaultResponseType).error !== undefined){
+          throw new Error((userData as DefaultResponseType).message);
+        }
+        this.userName = (userData as UserInfoType).name;
+      });
+    }
 
-    })
 
     this.authService.userName$.subscribe(userName => {
       this.userName = userName;

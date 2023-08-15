@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../../core/auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {LoginResponseType} from "../../../../types/login-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -23,6 +23,7 @@ export class SignupComponent {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private _snackbar: MatSnackBar,
+              private activatedRoute: ActivatedRoute,
               private router: Router) {
   }
 
@@ -55,7 +56,14 @@ export class SignupComponent {
               this.authService.updateUserName((data as UserInfoType).name);
             });
             this._snackbar.open('Signup successful');
-            this.router.navigate(['/']);
+
+            const articleUrl = this.activatedRoute.snapshot.queryParams['articleUrl'];
+            if (articleUrl) {
+              this.router.navigate(['/article/' + articleUrl]);
+            } else {
+              this.router.navigate(['/']);
+            }
+
           },
           error: (errorResponse: HttpErrorResponse) => {
             if(errorResponse.error && errorResponse.error.message){

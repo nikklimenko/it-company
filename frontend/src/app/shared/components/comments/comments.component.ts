@@ -53,26 +53,37 @@ export class CommentsComponent implements OnInit, OnChanges {
     this.commentsParams = {
       article: this.article.id
     }
+
   }
 
   getComments() {
     this.loading = true;
     this.commentsService.getComments(this.commentsParams).subscribe((commentsData: CommentsType) => {
-      this.commentsService.getArticleCommentsActionsForUser(this.article.id)
-        .subscribe((data: CommentActionForUserType[]) => {
-          this.comments = commentsData.comments.map(item => {
-            item.isUserLiked = false;
-            item.isUserDisliked = false;
-            data.forEach(commentAction => {
-              if (commentAction.comment === item.id) {
-                item.isUserLiked = commentAction.action === 'like';
-                item.isUserDisliked = commentAction.action === 'dislike';
-              }
+      if(this.isLogged){
+        this.commentsService.getArticleCommentsActionsForUser(this.article.id)
+          .subscribe((data: CommentActionForUserType[]) => {
+            this.comments = commentsData.comments.map(item => {
+              item.isUserLiked = false;
+              item.isUserDisliked = false;
+              data.forEach(commentAction => {
+                if (commentAction.comment === item.id) {
+                  item.isUserLiked = commentAction.action === 'like';
+                  item.isUserDisliked = commentAction.action === 'dislike';
+                }
+              });
+              return item;
             });
-            return item;
+            this.showLoadMoreButton = commentsData.allCount > this.comments.length;
           });
+      }else {
+        this.comments = commentsData.comments.map(item => {
+          item.isUserLiked = false;
+          item.isUserDisliked = false;
+          return item;
         });
-      this.showLoadMoreButton = commentsData.allCount > this.comments.length;
+        this.showLoadMoreButton = commentsData.allCount > this.comments.length;
+      }
+
       this.loading = false;
     });
   }
@@ -81,7 +92,6 @@ export class CommentsComponent implements OnInit, OnChanges {
     this.commentsService.loadMoreComments();
     this.getComments();
   }
-
 
   addComment() {
     this.commentsService.addComment(this.commentText, this.article.id)
@@ -100,6 +110,11 @@ export class CommentsComponent implements OnInit, OnChanges {
           }
         }
       })
+  }
+
+  navigate(path: string) {
+    const url = path === 'login' ? 'login' : 'signup';
+    this.router.navigate([`${url}/back`], { queryParams: { articleUrl: this.article.url } });
   }
 
 }
