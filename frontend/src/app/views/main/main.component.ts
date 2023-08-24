@@ -5,6 +5,10 @@ import {AdvantagesType} from "../../../types/advantages.type";
 import {ArticleType} from "../../../types/article.type";
 import {ArticleService} from "../../shared/services/article.service";
 import {ReviewType} from "../../../types/review.type";
+import {ActivatedRoute} from "@angular/router";
+import {MainAnchorType} from "../../../types/main-anchor.type";
+import {ScrollService} from "../../shared/services/scroll.service";
+import {delay} from "rxjs";
 
 @Component({
   selector: 'app-main',
@@ -150,8 +154,11 @@ export class MainComponent implements OnInit{
   ];
 
   popularArticles: ArticleType[] = [];
+  mainAnchor = MainAnchorType;
 
-  constructor(private articleService: ArticleService) {
+  constructor(private articleService: ArticleService,
+              private activatedRoute: ActivatedRoute,
+              private scrollService: ScrollService) {
   }
 
   ngOnInit() {
@@ -159,7 +166,19 @@ export class MainComponent implements OnInit{
     this.articleService.getPopularArticles()
       .subscribe((data:ArticleType[]) => {
         this.popularArticles = data;
-      })
+      });
+
+    this.activatedRoute.fragment
+      .pipe(
+        delay(300)
+      )
+      .subscribe((fragment: string | null) => {
+      const foundedAnchor = Object.keys(this.mainAnchor).find(key => key === fragment);
+      if(foundedAnchor){
+        this.scrollService.behaviorScrollTo(foundedAnchor);
+      }
+
+    });
 
 
   }
